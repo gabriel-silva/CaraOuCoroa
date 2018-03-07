@@ -1,49 +1,22 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Image,
-  StyleSheet
-} from 'react-native';
-
-
-const logo = require('./src/imgs/logo.png');
-const btnJogar = require('./src/imgs/botao_jogar.png');
-const btnSobreJogo = require('./src/imgs/sobre_jogo.png');
-const btnOutrosJogos = require('./src/imgs/outros_jogos.png');
+import { Router, Scene } from 'react-native-router-flux';
+import Principal from './src/components/Principal';
+import SobreJogo from './src/components/SobreJogo';
+import OutrosJogo from './src/components/OutrosJogos';
 
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.cenaPrincipal}>
-
-        <View style={styles.apresentacaoJogo}>
-          <Image source={logo} />
-          <Image source={btnJogar} />
-        </View>
-
-        <View style={styles.rodape}>
-          <Image source={btnSobreJogo} />
-          <Image source={btnOutrosJogos} />
-        </View>
-
-      </View>
+      //initil, props para definir a cena principal
+      // hideNavBar, esconde navBar.
+      //sceneStyle, aplica estilos em todas as cenas.
+      <Router sceneStyle={{ paddingTop: 50 }}>
+        <Scene key='app'>
+          <Scene key='principal' component={Principal} initil title="Cara ou Coroa" />
+          <Scene key='sobrejogo' component={SobreJogo} title="Sobre o Jogo" />
+          <Scene key='outrosjogos' component={OutrosJogo} title="Outros Jogos" />
+        </Scene>
+      </Router>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  cenaPrincipal: {
-    flex: 1,
-    backgroundColor: '#61BD8C'
-  },
-  apresentacaoJogo: {
-    flex: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  rodape: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  }
-});
